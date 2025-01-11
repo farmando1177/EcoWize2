@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart'; // استيراد Firebase Auth
+import 'package:cloud_firestore/cloud_firestore.dart'; // استيراد Firestore
 import 'HomePage.dart'; // استيراد الصفحة الرئيسية
 
 class CreateAccountPage extends StatefulWidget {
-  final bool isMunicipality; // تحديد نوع المستخدم
+  final bool isMunicipality; // تحديد نوع المستخدم (بلدية أم شركة)
 
   CreateAccountPage({required this.isMunicipality});
 
@@ -103,16 +104,27 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                         (widget.isMunicipality ? municipality.isNotEmpty : true) &&
                         city.isNotEmpty && password.isNotEmpty) {
                       try {
-                        // إنشاء حساب جديد باستخدام Firebase
+                        // إنشاء حساب جديد باستخدام Firebase Authentication
                         UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
                           email: email,
                           password: password,
                         );
 
-                        // يمكنك الآن استخدام userCredential لتخزين بيانات المستخدم في Firestore إذا لزم الأمر
-                        print('Account created successfully! User ID: ${userCredential.user?.uid}');
+                        // الحصول على UID للمستخدم
+                        String uid = userCredential.user?.uid ?? '';
 
-                        // الانتقال إلى الصفحة الرئيسية
+                        // تخزين بيانات المستخدم في Firestore
+                        await FirebaseFirestore.instance.collection('users').doc(uid).set({
+                          'fullName': fullName,
+                          'email': email,
+                          'mobileNumber': mobileNumber,
+                          'municipality': widget.isMunicipality ? municipality : '',
+                          'city': city,
+                          'accountType': widget.isMunicipality ? 'Municipality' : 'Company',
+                          'createdAt': FieldValue.serverTimestamp(),
+                        });
+
+                        // الانتقال إلى الصفحة الرئيسية بعد إنشاء الحساب
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => HomePage()),
