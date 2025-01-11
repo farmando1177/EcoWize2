@@ -20,6 +20,8 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
   final TextEditingController _cityController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  String? companyId; // متغير لتخزين الـ ID الخاص بالشركة بعد التسجيل
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -124,11 +126,11 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                           'createdAt': FieldValue.serverTimestamp(),
                         });
 
-                        // الانتقال إلى الصفحة الرئيسية بعد إنشاء الحساب
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => HomePage()),
-                        );
+                        // تخزين الـ ID الخاص بالشركة لعرضه بعد التسجيل
+                        setState(() {
+                          companyId = uid;
+                        });
+
                       } catch (e) {
                         // عرض رسالة خطأ إذا فشل إنشاء الحساب
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -149,6 +151,15 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                     foregroundColor: Colors.white,
                   ),
                 ),
+                // إذا كان الـ companyId غير فارغ، سيتم عرض الـ ID الخاص بالشركة
+                if (companyId != null) 
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20.0),
+                    child: Text(
+                      'Your company ID: $companyId',
+                      style: TextStyle(fontSize: 18, color: Colors.green),
+                    ),
+                  ),
               ],
             ),
           ),
