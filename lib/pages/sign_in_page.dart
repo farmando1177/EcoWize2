@@ -35,7 +35,7 @@ class _SignInPageState extends State<SignInPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('تسجيل الدخول'),
+        title: const Text('Sign In'),
         backgroundColor: Colors.green,
       ),
       body: Padding(
@@ -46,43 +46,43 @@ class _SignInPageState extends State<SignInPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // حقل "معرف الموظف"
+              // حقل "Employee ID"
               TextFormField(
                 controller: _employeeIdController,
                 decoration: const InputDecoration(
-                  labelText: 'معرف الموظف',
-                  hintText: 'أدخل معرف الموظف',
+                  labelText: 'Employee ID',
+                  hintText: 'Enter Employee ID',
                   border: OutlineInputBorder(),
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'الرجاء إدخال معرف الموظف';
+                    return 'Please enter the Employee ID';
                   }
                   return null;
                 },
               ),
               const SizedBox(height: 16),
 
-              // حقل "معرف الشركة"
+              // حقل "Company ID"
               TextFormField(
                 controller: _companyIdController,
                 decoration: const InputDecoration(
-                  labelText: 'معرف الشركة',
-                  hintText: 'أدخل معرف الشركة',
+                  labelText: 'Company ID',
+                  hintText: 'Enter Company ID',
                   border: OutlineInputBorder(),
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'الرجاء إدخال معرف الشركة';
+                    return 'Please enter the Company ID';
                   }
                   return null;
                 },
               ),
               const SizedBox(height: 16),
 
-              // مربع "تذكرني"
+              // مربع "Remember Me"
               CheckboxListTile(
-                title: const Text('تذكرني'),
+                title: const Text('Remember Me'),
                 value: _rememberMe,
                 onChanged: (bool? newValue) {
                   setState(() {
@@ -92,23 +92,23 @@ class _SignInPageState extends State<SignInPage> {
               ),
               const SizedBox(height: 32),
 
-              // زر "تسجيل الدخول"
+              // زر "Sign In"
               ElevatedButton(
                 onPressed: _signIn,
-                child: const Text('تسجيل الدخول'),
+                child: const Text('Sign In'),
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 16), backgroundColor: Colors.green,
                 ),
               ),
               const SizedBox(height: 16),
 
-              // رابط "نسيت كلمة المرور"
+              // رابط "Forgot Password?"
               TextButton(
                 onPressed: () {
                   // منطق لإعادة تعيين كلمة المرور
-                  print('إعادة تعيين كلمة المرور');
+                  print('Reset password');
                 },
-                child: const Text('نسيت كلمة المرور؟'),
+                child: const Text('Forgot Password?'),
               ),
             ],
           ),
