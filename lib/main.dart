@@ -3,7 +3,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'pages/create_account_page.dart';
 import 'pages/sign_up_page.dart';   // استيراد صفحة التسجيل
 import 'pages/sign_in_page.dart';   // استيراد صفحة تسجيل الدخول
-import 'pages/notification_service.dart'; // استيراد NotificationService  // استيراد الصفحة الرئيسية بعد التسجيل
+import 'pages/notification_service.dart'; // استيراد NotificationService
+
+  // استيراد الصفحة الرئيسية بعد التسجيل
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized(); // تأكد من أن Flutter جاهز

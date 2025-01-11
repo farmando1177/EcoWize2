@@ -4,7 +4,6 @@ import 'ControlPage.dart';
 import 'ProfilePage.dart';
 import 'SupportPage.dart';
 import 'SettingsPage.dart';
-import 'AddEmployeePage.dart'; // استيراد صفحة إضافة الموظف
 
 void main() {
   runApp(const MyApp());
@@ -112,7 +111,7 @@ class _HomePageState extends State<HomePage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const AddEmployeePage(), // الانتقال إلى صفحة إضافة الموظف
+                      builder: (context) => const AddEmployeePage(),
                     ),
                   );
                 },
