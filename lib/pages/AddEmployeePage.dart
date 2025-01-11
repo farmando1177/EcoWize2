@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+// تم تعليق استيراد Firebase مؤقتاً لأننا لا نحتاج إليه الآن
+// import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AddEmployeePage extends StatefulWidget {
   @override
@@ -15,6 +16,8 @@ class _AddEmployeePageState extends State<AddEmployeePage> {
   final _passwordController = TextEditingController();
   final _companyIdController = TextEditingController();
 
+  // دالة وهمية لإضافة الموظف
+  // في الوقت الحالي، نقوم بمحاكاة إضافة الموظف فقط
   Future<void> addEmployee() async {
     String employeeName = _employeeNameController.text;
     String email = _emailController.text;
@@ -26,23 +29,11 @@ class _AddEmployeePageState extends State<AddEmployeePage> {
     if (employeeName.isNotEmpty && email.isNotEmpty && phone.isNotEmpty &&
         employeeId.isNotEmpty && password.isNotEmpty && companyId.isNotEmpty) {
       try {
-        // إنشاء مستخدم جديد باستخدام Firebase Authentication
-        UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: email,
-          password: password,
-        );
-
-        // تخزين بيانات الموظف في Firestore
-        await FirebaseFirestore.instance.collection('employees').doc(employeeId).set({
-          'employeeName': employeeName,
-          'email': email,
-          'phone': phone,
-          'companyId': companyId,
-          'createdAt': FieldValue.serverTimestamp(),
-        });
-
+        // محاكاة إضافة الموظف بنجاح
+        // هنا يمكنك ربط الكود مع Firebase لاحقًا
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('تم إضافة الموظف بنجاح')));
       } catch (e) {
+        // في حال حدوث خطأ، يتم إظهار رسالة الخطأ
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('فشل في إضافة الموظف: $e')));
       }
     } else {
@@ -88,7 +79,7 @@ class _AddEmployeePageState extends State<AddEmployeePage> {
             ),
             SizedBox(height: 20),
             ElevatedButton(
-              onPressed: addEmployee,
+              onPressed: addEmployee, // عند الضغط على الزر، يتم تنفيذ دالة إضافة الموظف
               child: Text('إضافة الموظف'),
               style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
             ),
