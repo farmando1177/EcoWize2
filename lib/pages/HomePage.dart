@@ -4,6 +4,7 @@ import 'ControlPage.dart';
 import 'ProfilePage.dart';
 import 'SupportPage.dart';
 import 'SettingsPage.dart';
+import 'AddEmployeePage.dart'; // استيراد صفحة إضافة الموظف
 
 void main() {
   runApp(const MyApp());
@@ -101,7 +102,7 @@ class _HomePageState extends State<HomePage> {
                 },
                 child: const Text('تصنيف النفايات'),
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.green,
+                  backgroundColor: Colors.green,
                   padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 40),
                 ),
               ),
@@ -111,13 +112,13 @@ class _HomePageState extends State<HomePage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const AddEmployeePage(),
+                      builder: (context) => const AddEmployeePage(), // الانتقال إلى صفحة إضافة الموظف
                     ),
                   );
                 },
                 child: const Text('إضافة الموظفين'),
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.green,
+                  backgroundColor: Colors.green,
                   padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 40),
                 ),
               ),
